@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@id/nav_host_fragment"
+        style="@style/Body"
+        app:navGraph="@navigation/nav_graph_home"
+        tools:ignore="MissingConstraints"
+        />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_first_fragment_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="今天星期一"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_second_fragment_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="今天星期二"
+            android:textSize="28dp"
+            android:textStyle="normal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_third_fragment_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="今天星期三"
+            android:textSize="28dp"
+            android:textStyle="normal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_fourth_fragment_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="今天星期四"
+            android:textSize="28dp"
+            android:textStyle="normal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

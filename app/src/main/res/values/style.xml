@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="bottom_tab_title_active">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+<!--        <item name="android:paddingStart">100dp</item>-->
+<!--        <item name="android:paddingEnd">100dp</item>-->
+    </style>
+
+    <style name="bottom_tab_title_inactive">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+<!--        <item name="android:paddingStart">100dp</item>-->
+<!--        <item name="android:paddingEnd">100dp</item>-->
+    </style>
+
+</resources>

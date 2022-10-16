@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@id/firstFragmentMenu"
+        android:title="今天星期一今天星期一今天星期一"
+        android:icon="@drawable/ic_equipment_unselected"
+        />
+
+    <item
+        android:id="@id/secondFragmentMenu"
+        android:title="今天星期二"
+        android:icon="@drawable/ic_equipment_unselected"
+        />
+
+    <item
+        android:id="@id/thirdFragmentMenu"
+        android:title="今天星期三"
+        android:icon="@drawable/ic_equipment_unselected"
+        />
+
+    <item
+        android:id="@id/fourthFragmentMenu"
+        android:title="今天星期四"
+        android:icon="@drawable/ic_equipment_unselected"
+        />
+
+</menu>
