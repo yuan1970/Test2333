@@ -8,7 +8,7 @@
     >
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@id/nav_host_fragment"
+        android:id="@+id/nav_host_fragment"
         style="@style/Body"
         app:navGraph="@navigation/nav_graph_home"
         tools:ignore="MissingConstraints"
@@ -18,10 +18,11 @@
         android:id="@+id/bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
         <TextView
             android:id="@+id/tv_first_fragment_tab"
@@ -29,12 +30,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="今天星期一"
+            android:textColor="@color/black"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            />
 
         <TextView
             android:id="@+id/tv_second_fragment_tab"
@@ -42,11 +44,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="今天星期二"
+            android:textColor="@color/greyText"
             android:textSize="28dp"
             android:textStyle="normal"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            />
 
         <TextView
             android:id="@+id/tv_third_fragment_tab"
@@ -54,11 +58,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="今天星期三"
+            android:textColor="@color/greyText"
             android:textSize="28dp"
             android:textStyle="normal"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            />
 
         <TextView
             android:id="@+id/tv_fourth_fragment_tab"
@@ -66,11 +72,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="今天星期四"
+            android:textColor="@color/greyText"
             android:textSize="28dp"
             android:textStyle="normal"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"/>
+            />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
