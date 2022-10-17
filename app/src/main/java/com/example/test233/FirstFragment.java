@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -35,6 +33,8 @@ public class FirstFragment extends Fragment {
         mAdapter = new ShowAdapter ();
     }
 
+    private MyExpandableAdapter expandAdapter;
+
     private RecyclerView recyclerView;
 
     private ExpandableListView expandableListView;
@@ -46,22 +46,21 @@ public class FirstFragment extends Fragment {
     private Runnable bannerRunnable = new Runnable () {
         @Override
         public void run () {
-            if (mCurrentPosition.getValue ()+1<mAdapter.getData ().size ()){
+            if (mCurrentPosition.getValue () + 1 < mAdapter.getData ().size ()) {
 
-                recyclerView.scrollToPosition (mCurrentPosition.getValue () + 1);
-                mCurrentPosition.setValue (mCurrentPosition.getValue ()+1);
-            }else {
-                ShufflingStatesEvent event=new ShufflingStatesEvent (Key.FROM_FIRST_FRAGMENT);
+                mCurrentPosition.setValue (mCurrentPosition.getValue () + 1);
+            } else {
+                ShufflingStatesEvent event = new ShufflingStatesEvent (Key.FROM_FIRST_FRAGMENT);
                 event.setState (true);
                 EventBus.getDefault ().post (event);
             }
-            mHandler.postDelayed (bannerRunnable, 1000);
+            mHandler.postDelayed (bannerRunnable, 10000);
         }
     };
 
 
-    private String[] groups={"好友","同学","同事"};
-    private String[][] childs={{"Tom","Jerry","Jeck"},{"XY","WX","YH"},{}};
+    private String[] groups = {"好友", "同学", "同事"};
+    private String[][] childs = {{"Tom", "Jerry", "Jeck"}, {"XY", "WX", "YH"}, {}};
 
 
     @Nullable
@@ -77,41 +76,19 @@ public class FirstFragment extends Fragment {
         mCurrentPosition.setValue (0);
 
         recyclerView = view.findViewById (R.id.rv);
-        expandableListView=view.findViewById (R.id.elv);
-        MyExpandableAdapter adapter = new MyExpandableAdapter (getContext (), groups, childs);
-        expandableListView.setAdapter(adapter);
+        expandableListView = view.findViewById (R.id.elv);
 
-        for(int i = 0; i < adapter.getGroupCount(); i++){
-            expandableListView.expandGroup(i);
-        }
-
-        expandableListView.setOnGroupClickListener (new ExpandableListView.OnGroupClickListener () {
-            @Override
-            public boolean onGroupClick (ExpandableListView parent, View v, int groupPosition, long id) {
-                Log.e ("TAG", "onItemClick: ------------------------>>>>>"+groupPosition+"------"+groups[groupPosition] );
-                if (childs[groupPosition]==null||childs[groupPosition].length==0){
-                    adapter.setPosition (groupPosition,-1);
-                }else {
-                    adapter.setPosition (-1,-1);
-                }
-                return false;
-            }
-        });
-        expandableListView.setOnChildClickListener (new ExpandableListView.OnChildClickListener () {
-            @Override
-            public boolean onChildClick (ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Log.e ("TAG", "onItemClick: ------------------------>>>>>"+childPosition+"------"+childs[groupPosition][childPosition] );
-                adapter.setPosition (groupPosition,childPosition);
-                return true;
-            }
-        });
+        initExpandableList ();
 
         mCurrentPosition.observeInFragment (this, new Observer<Integer> () {
             @Override
             public void onChanged (Integer integer) {
-                if (!expandableListView.isGroupExpanded (integer)){
-                    expandableListView.expandGroup (integer);
+                int[] data = getGroupAdChildNum (integer);
+                if (!expandableListView.isGroupExpanded (data[0])) {
+                    expandableListView.expandGroup (data[0]);
                 }
+                expandAdapter.setPosition (data[0], data[1]);
+                recyclerView.scrollToPosition (integer);
             }
         });
 
@@ -151,10 +128,122 @@ public class FirstFragment extends Fragment {
         text.setText ("文字展示");
         data.add (text);
 
+        ShowBean img4 = new ShowBean ();
+        img4.setType (0);
+        img4.setImg ("https://lf-cdn-tos.bytescm.com/obj/static/xitu_extension/static/github.46c47564.png");
+        img4.setText ("图文展示44444444444444444444444444444");
+        data.add (img4);
+
+
+        ShowBean img5 = new ShowBean ();
+        img5.setType (0);
+        img5.setImg ("https://lf-cdn-tos.bytescm.com/obj/static/xitu_extension/static/github.46c47564.png");
+        img5.setText ("图文展示5555555555555555555555555555555555555");
+        data.add (img5);
+
+        ShowBean text2 = new ShowBean ();
+        text2.setType (1);
+        text2.setText ("文字展示7777777777777777777777777");
+        data.add (text2);
+
         mAdapter.setList (data);
 
-//        mHandler.removeCallbacksAndMessages(null);
-//        mHandler.postDelayed(bannerRunnable, 1000);
+        mHandler.removeCallbacksAndMessages (null);
+        mHandler.postDelayed (bannerRunnable, 10000);
 
+    }
+
+    private void initExpandableList () {
+
+        expandAdapter = new MyExpandableAdapter (getContext (), groups, childs);
+        expandableListView.setAdapter (expandAdapter);
+        if (childs[0].length != 0) {
+            expandAdapter.setPosition (0, 0);
+        } else {
+            expandAdapter.setPosition (0, -1);
+        }
+
+        for (int i = 0; i < expandAdapter.getGroupCount (); i++) {
+            expandableListView.expandGroup (i);
+        }
+
+        expandableListView.setOnGroupClickListener (new ExpandableListView.OnGroupClickListener () {
+            @Override
+            public boolean onGroupClick (ExpandableListView parent, View v, int groupPosition, long id) {
+                Log.e ("TAG", "onItemClick: ------------------------>>>>>" + groupPosition + "------" + groups[groupPosition]);
+                if (childs[groupPosition] == null || childs[groupPosition].length == 0) {
+                    expandAdapter.setPosition (groupPosition, -1);
+                    int choosePosition = 0;
+                    for (int i = 0; i < groupPosition; i++) {
+                        if (childs[i].length == 0) {
+                            choosePosition++;
+                        } else {
+                            choosePosition = choosePosition + childs[i].length;
+                        }
+                    }
+                    mCurrentPosition.setValue (choosePosition);
+                    mHandler.removeCallbacksAndMessages (null);
+                    mHandler.postDelayed (bannerRunnable, 10000);
+                } else {
+                    int integer = mCurrentPosition.getValue ();
+                    int[] data = getGroupAdChildNum (integer);
+                    expandAdapter.setPosition (data[0], data[1]);
+                }
+                return false;
+            }
+        });
+        expandableListView.setOnChildClickListener (new ExpandableListView.OnChildClickListener () {
+            @Override
+            public boolean onChildClick (ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Log.e ("TAG", "onItemClick: ------------------------>>>>>" + childPosition + "------" + childs[groupPosition][childPosition]);
+                expandAdapter.setPosition (groupPosition, childPosition);
+                int choosePosition = 0;
+                for (int i = 0; i < groupPosition; i++) {
+                    if (childs[i].length == 0) {
+                        choosePosition++;
+                    } else {
+                        choosePosition = choosePosition + childs[i].length;
+                    }
+                }
+
+                if (childs[groupPosition].length == 0) {
+                    choosePosition++;
+                } else {
+                    choosePosition = choosePosition + childPosition + 1;
+                }
+
+                mCurrentPosition.setValue (choosePosition - 1);
+                mHandler.removeCallbacksAndMessages (null);
+                mHandler.postDelayed (bannerRunnable, 10000);
+                return true;
+            }
+        });
+    }
+
+    private int[] getGroupAdChildNum (int integer) {
+        int choosePosition = -1;
+        int recordGroupNum = 0;
+        int recordChildNum = 0;
+        for (int i = 0; i < groups.length; i++) {
+            if (childs[i].length == 0) {
+                choosePosition++;
+                if (choosePosition == integer) {
+                    recordGroupNum = i;
+                    recordChildNum = -1;
+                    break;
+                }
+            } else {
+                for (int j = 0; j < childs[i].length; j++) {
+                    choosePosition++;
+                    if (choosePosition == integer) {
+                        recordGroupNum = i;
+                        recordChildNum = j;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return new int[]{recordGroupNum, recordChildNum};
     }
 }

@@ -25,12 +25,10 @@ class ShowAdapter : BaseMultiItemQuickAdapter<ShowBean, BaseViewHolder>() {
             ShowMultipleEntity.IMG -> {
                 Glide.with(context).load(item.img).centerCrop().into(holder.getView(R.id.img))
                 holder.getView<TextView>(R.id.text).text = item.text
-                Log.e("222222222222222222222","??????????????????????????????"+item.text)
 
             }
             ShowMultipleEntity.TEXT->{
                 holder.getView<TextView>(R.id.text).text = item.text
-                Log.e("3333333333333333333333","??????????????????????????????"+item.text)
             }
             ShowMultipleEntity.OTHERS->{
 
