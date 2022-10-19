@@ -1,5 +1,6 @@
 package com.example.test233;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -71,6 +72,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public View getGroupView (int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView==null){

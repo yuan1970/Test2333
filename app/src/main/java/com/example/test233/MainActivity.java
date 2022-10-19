@@ -3,6 +3,7 @@ package com.example.test233;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private NavController controller;
     private TextView firstTab,secondTab,thirdTab,fourthTab;
 
+    private MyLiveData<TextView> currentTab=new MyLiveData<> ();
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -36,6 +40,55 @@ public class MainActivity extends AppCompatActivity {
         secondTab=findViewById (R.id.tv_second_fragment_tab);
         thirdTab=findViewById (R.id.tv_third_fragment_tab);
         fourthTab=findViewById (R.id.tv_fourth_fragment_tab);
+        initListener();
+        currentTab.setValue (firstTab);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void initListener () {
+        firstTab.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                controller.navigate (R.id.firstFragment);
+                if (currentTab.getValue ().getId ()!=firstTab.getId ()){
+                    changeTabStates (currentTab.getValue (),firstTab);
+                    currentTab.setValue (firstTab);
+                }
+            }
+        });
+
+        secondTab.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                controller.navigate (R.id.secondFragment);
+                if (currentTab.getValue ().getId ()!=secondTab.getId ()){
+                    changeTabStates (currentTab.getValue (),secondTab);
+                    currentTab.setValue (secondTab);
+                }
+            }
+        });
+
+        thirdTab.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                controller.navigate (R.id.thirdFragment);
+                if (currentTab.getValue ().getId ()!=thirdTab.getId ()){
+                    changeTabStates (currentTab.getValue (),thirdTab);
+                    currentTab.setValue (thirdTab);
+                }
+            }
+        });
+
+        fourthTab.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                controller.navigate (R.id.fourthFragment);
+                if (currentTab.getValue ().getId ()!=fourthTab.getId ()){
+                    changeTabStates (currentTab.getValue (),fourthTab);
+                    currentTab.setValue (fourthTab);
+                }
+            }
+        });
     }
 
     @Override
