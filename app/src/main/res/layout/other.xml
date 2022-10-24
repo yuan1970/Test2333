@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <View
+        android:id="@+id/view1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintBottom_toBottomOf="@id/tv"
+        app:layout_constraintEnd_toStartOf="@id/tv"
+        app:layout_constraintTop_toTopOf="@id/tv"
+        />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:text="过往病史"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/dp_40"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_disease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:textColor="@color/greyText"
+        android:textStyle="bold"
+        android:text="疾病名：肥胖症"
+        app:layout_constraintTop_toBottomOf="@id/tv"
+       app:layout_constraintStart_toStartOf="@id/tv"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="30dp"
+        android:textColor="@color/teal_200"
+        android:text="益用食物"
+        app:layout_constraintTop_toBottomOf="@id/tv_disease"
+        app:layout_constraintStart_toStartOf="@id/tv_disease"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/tv_good_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv2"
+        app:layout_constraintStart_toStartOf="@id/tv2"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/greyText"
+        android:textSize="30dp"/>
+
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="30dp"
+        android:textColor="@color/purple_200"
+        android:text="忌（少）用食物"
+        app:layout_constraintTop_toBottomOf="@id/tv_good_food"
+        app:layout_constraintStart_toStartOf="@id/tv_good_food"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/tv_bad_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv3"
+        app:layout_constraintStart_toStartOf="@id/tv3"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/greyText"
+        android:textSize="30dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
