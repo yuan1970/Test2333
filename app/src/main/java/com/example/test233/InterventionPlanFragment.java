@@ -17,6 +17,14 @@ import androidx.fragment.app.Fragment;
 public class InterventionPlanFragment extends Fragment {
 
 
+    public static InterventionPlanFragment newInstance() {
+        InterventionPlanFragment fragment = new InterventionPlanFragment();
+        Bundle args = new Bundle();
+
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

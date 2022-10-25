@@ -19,6 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class DoctorDiagnosisFragment extends Fragment {
 
 
+    public static DoctorDiagnosisFragment newInstance() {
+        DoctorDiagnosisFragment fragment = new DoctorDiagnosisFragment();
+        return fragment;
+    }
+
+
     @Nullable
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

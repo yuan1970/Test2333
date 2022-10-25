@@ -14,7 +14,15 @@ import androidx.fragment.app.Fragment;
  * @date 2022/10/24-15:54
  * @desc
  */
-public class RecommendPrescriptionFragment extends Fragment {
+public class RecommendFragment extends Fragment {
+
+
+    public static RecommendFragment newInstance() {
+        RecommendFragment fragment = new RecommendFragment();
+        Bundle args = new Bundle();
+
+        return fragment;
+    }
 
     @Nullable
     @Override
